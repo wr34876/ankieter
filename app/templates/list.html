@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kategorie ankiet</title>
+</head>
+<body>
+    <h1>Lista kategorii</h1>
+
+    {% if categories %}
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <strong>{{ category.name }}</strong>
+                    {% if category.polls %}
+                        <ul>
+                            {% for poll in category.polls %}
+                                <li>{{ poll.question }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Brak ankiet w tej kategorii.</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak kategorii.</p>
+    {% endif %}
+</body>
+</html>
