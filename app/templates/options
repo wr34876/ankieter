@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opcje odpowiedzi</title>
+</head>
+<body>
+    <h1>Opcje dla ankiety: "{{ poll.question }}"</h1>
+
+    {% if options %}
+        <ul>
+            {% for option in options %}
+                <li>{{ option.text }} – głosów: {{ option.votes }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak opcji odpowiedzi dla tej ankiety.</p>
+    {% endif %}
+</body>
+</html>
