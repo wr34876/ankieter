@@ -68,7 +68,11 @@ Ankieter/
 ## 🧪 Testy
 
 Testy jednostkowe realizowane przy użyciu `pytest` (znajdują się w folderze `tests/`).
+Aby je uruchomić:
 
+```bash
+pytest
+```
 ---
 
 ## ⚙️ CI/CD
