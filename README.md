@@ -19,10 +19,11 @@ Projekt został podzielony na kilka modułów, z wykorzystaniem dobrych praktyk 
 
 - **Python 3.x**
 - **Flask**
+- **Flask-SQLAlchemy** (ORM)
 - **SQLite** (baza danych)
 - **Jinja2** (szablony HTML)
 - **Bootstrap 5** (frontend)
-- **pytest** (testy)
+- **pytest** (testy jednostkowe)
 - **GitHub + GitHub Actions** (CI/CD)
 - **Render.com** (hosting)
 
@@ -34,10 +35,16 @@ Ankieter/
 ├── app/
 │ ├── init.py
 │ ├── routes.py
-│ ├── models.py
+│ ├── models/
+│ │ ├──poll.py
+│ │ ├──category.py
+│ │ ├──answer_option.py
 │ ├── templates/
+│ │ ├──index.html
+│ │ ├──list.html
 │ └── static/
 ├── tests/
+│ │ ├──test_routes.py
 ├── run.py
 ├── requirements.txt
 └── README.md
@@ -49,10 +56,10 @@ Ankieter/
 
 ### ✅ Modele
 
-1. **Poll** – ankieta zawierająca pytanie i datę utworzenia.
-2. **AnswerOption** – możliwe odpowiedzi powiązane z ankietą.
+1. **Poll** – ankieta zawierająca pytanie, datę utworzenia i powiązanie z kategorią.
+2. **AnswerOption** – możliwe odpowiedzi powiązane z ankietą, zawierają tekst i licznik głosów.
 3. **Vote** – reprezentuje oddany głos.
-4. **Category** – opcjonalne kategorie tematyczne dla ankiet.
+4. **Category** – opcjonalne kategorie tematyczne grupujące ankiety.
 5. **UserFeedback** – formularz do zostawiania opinii o aplikacji.
 
 ### ✅ Widoki
@@ -67,8 +74,13 @@ Ankieter/
 
 ## 🧪 Testy
 
-Testy jednostkowe realizowane przy użyciu `pytest` (znajdują się w folderze `tests/`).
-Aby je uruchomić:
+Testy jednostkowe realizowane przy użyciu `pytest` w pliku `tests/test_routes.py`.
+
+Przykładowe testy sprawdzają:
+- **Poprawne ładowanie stron** (`/`, `/polls`, `/polls/<id>/options`, `/categories`),
+- **Obsługę błędów** (np. zapytanie o nieistniejącą ankietę).
+
+Aby je uruchomić należy wpisać komendę:
 
 ```bash
 pytest
@@ -76,17 +88,20 @@ pytest
 Przykładowy test sprawdzający działanie widoku:
 ```python
 def test_index_page(client):
-    response = client.get('/')
+    response = client.get('/polls')
     assert response.status_code == 200
+    assert b"Testowe pytanie?" in response.data
 ```
+
+Testy uruchamiają się na bazie SQLite w pamięci, dzięki czemu nie wpływają na produkcyjną bazę danych.
 
 ---
 
 ## ⚙️ CI/CD
 
-Projekt zawiera zautomatyzowane testowanie oraz proces wdrażania za pomocą GitHub Actions. Po każdym pushu do repo:
-- uruchamiane są testy,
-- jeśli zakończą się sukcesem – projekt jest deployowany na Render.com.
+Projekt zawiera zautomatyzowane testowanie oraz proces wdrażania za pomocą GitHub Actions. Po każdej aktualizacji repozytorium na GitHub:
+- uruchamiane są testy automatyczne,
+- jeśli testy przejdą pomyślnie, następuje automatyczny deploy na Render.com.
 
 ---
 
