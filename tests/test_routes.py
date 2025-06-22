@@ -59,9 +59,6 @@ def test_list_options_not_found(client):
     response = client.get('/polls/999/options')  # zakładamy, że 999 nie istnieje
     assert response.status_code == 404
 
-def test_index_page(client):
-    ...
-
 
 '''
 #test dla nieistniejącego poll_id w /polls/<int:poll_id>/options
