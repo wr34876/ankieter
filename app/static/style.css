@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+.actions {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+.button-small {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.polls-list {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.poll-item {
+    list-style: none;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.poll-item:last-child {
+    border-bottom: none;
+}
+
+.poll-item h3 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.date {
+    color: #7f8c8d;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.no-polls {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.option-inputs input {
+    margin-bottom: 10px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-secondary {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #95a5a6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.button-secondary:hover {
+    background-color: #7f8c8d;
+}
