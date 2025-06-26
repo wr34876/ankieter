@@ -66,6 +66,29 @@ def list_polls():
     return render_template('list.html', polls=polls)
 
 
+@main.route('/polls/<int:poll_id>/vote', methods=['POST'])
+def vote(poll_id):
+    """Obsługa głosowania w ankiecie"""
+    poll = Poll.query.get_or_404(poll_id)
+    selected_option_id = request.form.get('answer')
+
+    if not selected_option_id:
+        return "Nie wybrano odpowiedzi", 400
+
+    try:
+        selected_option = AnswerOption.query.get_or_404(selected_option_id)
+        if selected_option.poll_id != poll_id:
+            return "Nieprawidłowa opcja odpowiedzi", 400
+
+        selected_option.votes += 1
+        db.session.commit()
+
+        return redirect(url_for('main.view_poll', poll_id=poll_id))
+    except Exception as e:
+        db.session.rollback()
+        return f"Wystąpił błąd podczas głosowania: {str(e)}", 500
+
+
 @main.route('/categories')
 def list_categories():
     """Lista wszystkich kategorii"""
