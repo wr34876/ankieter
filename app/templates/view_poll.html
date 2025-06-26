@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ poll.question }} - Ankieter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ poll.question }}</h1>
+        
+        <div class="poll-container">
+            <form method="POST" action="{{ url_for('main.vote', poll_id=poll.id) }}" class="poll-form">
+                <div class="options-list">
+                    {% for option in options %}
+                    <div class="option-item">
+                        <input type="radio" id="option{{ option.id }}" name="answer" value="{{ option.id }}" required>
+                        <label for="option{{ option.id }}">{{ option.text }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-actions">
+                    <a href="{{ url_for('main.index') }}" class="button-secondary">Powrót do listy</a>
+                    <button type="submit" class="button">Zagłosuj</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="poll-info">
+            <p class="date">Data utworzenia: {{ poll.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        </div>
+    </div>
+</body>
+</html>
