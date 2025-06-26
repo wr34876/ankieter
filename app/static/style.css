@@ -143,3 +143,42 @@ h2 {
 .button-secondary:hover {
     background-color: #7f8c8d;
 }
+
+.poll-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.options-list {
+    margin-bottom: 30px;
+}
+
+.option-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.option-item:hover {
+    background-color: #f8f9fa;
+}
+
+.option-item input[type="radio"] {
+    margin-right: 10px;
+}
+
+.option-item label {
+    cursor: pointer;
+    display: inline-block;
+    width: calc(100% - 30px);
+}
+
+.poll-info {
+    text-align: center;
+    margin-top: 20px;
+}
