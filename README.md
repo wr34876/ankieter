@@ -1,3 +1,5 @@
+![CI/CD Status](https://github.com/wr34876/ankieter/actions/workflows/deploy.yml/badge.svg)
+
 # Ankieter
 
 Prosta aplikacja webowa do tworzenia i głosowania w ankietach, przygotowana w ramach projektu zaliczeniowego z przedmiotu *Narzędzia do automatyzacji budowy oprogramowania*.
