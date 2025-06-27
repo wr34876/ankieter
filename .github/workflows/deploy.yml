@@ -23,6 +23,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: 📦 pip-audit – check for vulnerable dependencies
+        run: |
+          pip install pip-audit
+          pip-audit || true
+
+      - name: 🛡️ Bandit Security Scan
+        run: |
+          pip install bandit
+          bandit -r app/ --exit-zero
+
       - name: 🧪 Run tests
         run: |
           pytest
