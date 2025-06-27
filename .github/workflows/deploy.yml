@@ -31,3 +31,12 @@ jobs:
         if: success()
         run: |
           curl -X POST "https://api.render.com/deploy/srv-d0vhi6m3jp1c73e77e60?key=${{ secrets.DEPLOY_KEY }}"
+
+      - name: 🔔 Notify Slack
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: "✅ Ankieter został zdeployowany na produkcję po udanych testach."
+          SLACK_USERNAME: "Ankieter Bot"
+          SLACK_TITLE: "Deploy zakończony powodzeniem 🚀"
