@@ -11,7 +11,7 @@ Aplikacja umożliwia:
 - głosowanie na wybraną opcję,
 - przeglądanie wyników ankiety,
 - przypisywanie ankiet do kategorii tematycznych,
-- zostawianie opinii o aplikacji.
+- zostawianie opinii o aplikacji poprzez prosty formularz feedbacku.
 
 Projekt został podzielony na kilka modułów, z wykorzystaniem dobrych praktyk Flaskowych (modularna struktura, szablony, testy jednostkowe, CI/CD).
 
@@ -38,15 +38,28 @@ Ankieter/
 │ ├── init.py
 │ ├── routes.py
 │ ├── models/
-│ │ ├──poll.py
-│ │ ├──category.py
-│ │ ├──answer_option.py
+│ │ ├── poll.py
+│ │ ├── category.py
+│ │ ├── answer_option.py
+│ │ ├── user_feedback.py # nowy model opinii użytkowników
 │ ├── templates/
-│ │ ├──index.html
-│ │ ├──list.html
+│ │ ├── index.html
+│ │ ├── list.html
+│ │ ├── create_poll.html
+│ │ ├── feedback_form.html # formularz opinii
+│ │ ├── feedback_thanks.html
+│ │ ├── view_poll.html
 │ └── static/
+│ │ ├── style.css
 ├── tests/
-│ │ ├──test_routes.py
+│ ├── test_routes.py
+│ ├── test_poll.py
+│ ├── conftest.py
+│ ├── test_answer_option.py
+│ ├── test_basic.py
+│ ├── test_category.py
+│ ├── test_create_poll.py # testy formularza tworzenia ankiet
+│ ├── test_feedback.py # testy funkcjonalności feedbacku
 ├── run.py
 ├── requirements.txt
 └── README.md
@@ -76,18 +89,20 @@ Ankieter/
 
 ## 🧪 Testy
 
-Testy jednostkowe realizowane przy użyciu `pytest` w pliku `tests/test_routes.py`.
+Testy jednostkowe realizowane przy użyciu `pytest`. Testy znajdują się w katalogu `tests/` i pokrywają:
 
-Przykładowe testy sprawdzają:
-- **Poprawne ładowanie stron** (`/`, `/polls`, `/polls/<id>/options`, `/categories`),
-- **Obsługę błędów** (np. zapytanie o nieistniejącą ankietę).
+- **Podstawowe widoki** (`/polls`, `/polls/<id>/options`, `/categories`),
+- **Obsługę tworzenia ankiet** (formularz GET i POST, walidacja danych),
+- **Głosowanie** (w tym testy poprawnego i niepoprawnego głosowania),
+- **Formularz opinii** (formularz GET i POST, walidacja),
+- **Obsługę błędów** (np. 404 dla nieistniejących zasobów).
 
 Aby je uruchomić należy wpisać komendę:
 
 ```bash
 pytest
 ```
-Przykładowy test sprawdzający działanie widoku:
+Przykładowy test widoku:
 ```python
 def test_index_page(client):
     response = client.get('/polls')
@@ -95,7 +110,7 @@ def test_index_page(client):
     assert b"Testowe pytanie?" in response.data
 ```
 
-Testy uruchamiają się na bazie SQLite w pamięci, dzięki czemu nie wpływają na produkcyjną bazę danych.
+Testy uruchamiają się na bazie SQLite w pamięci, co pozwala na izolację od danych produkcyjnych.
 
 ---
 
@@ -119,7 +134,7 @@ Projekt zawiera zautomatyzowane testowanie oraz proces wdrażania za pomocą Git
 ## 📌 Status projektu
 
 🔨 Projekt w trakcie realizacji – aktualnie w fazie szkieletu aplikacji.  
-Kolejne funkcje będą dodawane zgodnie z podziałem prac.
+Kolejne funkcje są sukcesywnie dodawane zgodnie z harmonogramem i podziałem prac.
 
 ---
 
