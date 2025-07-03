@@ -6,6 +6,7 @@ db = SQLAlchemy()
 from .models.poll import Poll
 from .models.answer_option import AnswerOption
 from .models.category import Category
+from .models.user_feedback import UserFeedback
 
 def create_app():
     app = Flask(__name__)

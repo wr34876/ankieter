@@ -3,6 +3,7 @@ from app import db
 from .models.poll import Poll
 from .models.answer_option import AnswerOption
 from .models.category import Category
+from .models.user_feedback import UserFeedback
 
 main = Blueprint('main', __name__)
 
@@ -106,3 +107,21 @@ def delete_poll(poll_id):
     db.session.delete(poll)
     db.session.commit()
     return redirect(url_for('main.index'))
+
+@main.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if request.method == 'POST':
+        message = request.form.get('message')
+        if not message.strip():
+            return "Treść opinii nie może być pusta", 400
+
+        try:
+            feedback = UserFeedback(message=message.strip())
+            db.session.add(feedback)
+            db.session.commit()
+            return render_template('feedback.html', success=True)
+        except Exception as e:
+            db.session.rollback()
+            return f"Błąd podczas zapisywania opinii: {str(e)}", 500
+
+    return render_template('feedback.html', success=False)
