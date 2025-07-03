@@ -33,6 +33,7 @@ Projekt został podzielony na kilka modułów, z wykorzystaniem dobrych praktyk 
 
 ## 📦 Struktura katalogów
 
+<pre markdown="1">
 Ankieter/
 ├── app/
 │ ├── init.py
@@ -64,7 +65,7 @@ Ankieter/
 ├── run.py
 ├── requirements.txt
 └── README.md
-
+</pre>
 
 ---
 
