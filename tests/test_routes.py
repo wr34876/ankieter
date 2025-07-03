@@ -100,7 +100,6 @@ def test_vote_missing_option(client):
     assert response.status_code == 400
     assert b'Nie wybrano odpowiedzi' in response.data
 
-
 def test_vote_invalid_option(client):
     # Zakładamy, że poll_id=1 istnieje, ale option_id=999 nie
     response = client.post('/polls/1/vote', data={'answer': 999})

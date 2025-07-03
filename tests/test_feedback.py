@@ -9,7 +9,6 @@ def test_feedback_form_get(client):
     assert response.status_code == 200
     assert b'Formularz opinii' in response.data
 
-
 def test_feedback_form_post(client, app):
     response = client.post('/feedback', data={'message': 'Świetna aplikacja!'}, follow_redirects=True)
     assert response.status_code == 200

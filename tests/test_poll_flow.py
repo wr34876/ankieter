@@ -24,7 +24,7 @@ def test_poll_vote_result_flow(client, app):
     # 3. Oddaj głos na jedną z opcji
     vote_response = client.post( f'/polls/{poll.id}/vote', data={'answer': option.id}, follow_redirects=True )
     assert vote_response.status_code == 200
-    # assert 'Dziękujemy za oddanie głosu' in vote_response.get_data(as_text=True)
+    assert 'Dziękujemy za oddanie głosu' in vote_response.get_data(as_text=True)
 
     # 4. Sprawdź wyniki ankiety
     result_response = client.get(f'/polls/{poll.id}/results')
