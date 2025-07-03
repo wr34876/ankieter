@@ -5,22 +5,30 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
     color: #333;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 40px auto;
+    padding: 30px 24px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.12);
 }
 
 h1 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 30px;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px #e0eafc;
 }
 
 h2 {
@@ -28,23 +36,34 @@ h2 {
     margin-bottom: 20px;
 }
 
+.about {
+    text-align: center;
+    margin-bottom: 32px;
+    color: #34495e;
+    font-size: 1.15rem;
+    background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+    border-radius: 8px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    font-style: italic;
+}
+
 .actions {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.button {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.button, .button-secondary, .button-small {
+    box-shadow: 0 2px 8px rgba(52,152,219,0.10);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
-
-.button:hover {
-    background-color: #2980b9;
+.button:hover, .button-secondary:hover, .button-small:hover {
+    background: linear-gradient(90deg, #2980b9 0%, #6dd5fa 100%);
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 18px rgba(52,152,219,0.18);
 }
 
 .button-small {
@@ -58,25 +77,35 @@ h2 {
 }
 
 .polls-list {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.98);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+    margin-bottom: 30px;
 }
 
 .poll-item {
     list-style: none;
-    padding: 15px;
+    padding: 18px;
     border-bottom: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #f8fafc 0%, #e0eafc 100%);
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+    transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+    position: relative;
 }
-
-.poll-item:last-child {
-    border-bottom: none;
+.poll-item:hover {
+    background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+    box-shadow: 0 8px 24px rgba(52,152,219,0.10);
+    transform: scale(1.02);
+    z-index: 2;
 }
 
 .poll-item h3 {
     color: #2c3e50;
     margin-bottom: 8px;
+    font-size: 1.25rem;
 }
 
 .date {
@@ -183,19 +212,58 @@ h2 {
     margin-top: 20px;
 }
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #ecf0f1;
+/* Wyniki ankiety - wykres słupkowy */
+.results-list {
+    margin-bottom: 30px;
+}
+.result-item {
+    margin-bottom: 18px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background: #fafbfc;
+    transition: background 0.2s;
+}
+.result-item.leading-option {
+    background: #eaf6ff;
+    border-color: #3498db;
+    font-weight: bold;
+}
+.result-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+.option-text {
     color: #2c3e50;
+}
+.votes {
+    color: #7f8c8d;
     font-size: 14px;
-    margin-top: 40px;
-    border-top: 1px solid #ccc;
 }
-.footer a {
-    color: #3498db;
-    text-decoration: none;
+.bar-outer {
+    width: 100%;
+    background: #e0e7ef;
+    border-radius: 4px;
+    height: 18px;
+    overflow: hidden;
 }
-.footer a:hover {
-    text-decoration: underline;
+.bar-inner {
+    height: 100%;
+    background: #3498db;
+    border-radius: 4px 0 0 4px;
+    transition: width 0.5s;
+}
+.total-votes {
+    text-align: right;
+    color: #34495e;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.no-votes {
+    text-align: center;
+    color: #e67e22;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
