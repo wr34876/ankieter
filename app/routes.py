@@ -128,7 +128,7 @@ def delete_poll(poll_id):
 @main.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        message = request.form.get('message')
+        message = request.form.get('message', '')
         if not message.strip():
             return "Wiadomość nie może być pusta.", 400
 

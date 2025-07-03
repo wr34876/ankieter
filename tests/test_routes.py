@@ -106,6 +106,18 @@ def test_vote_invalid_option(client):
     response = client.post('/polls/1/vote', data={'answer': 999})
     assert response.status_code == 404
 
+def test_vote_with_no_data(client):
+    response = client.post('/polls/1/vote', data={})
+    assert response.status_code == 400
+
+def test_vote_with_invalid_data_type(client):
+    response = client.post('/polls/1/vote', data={'answer': 'abc'})
+    assert response.status_code in (400, 404)
+
+def test_vote_on_nonexistent_poll(client):
+    response = client.post('/polls/9999/vote', data={'answer': 1})
+    assert response.status_code in (404, 400)
+
 def test_delete_poll(client, app):
     with app.app_context():
         from app.models.poll import Poll

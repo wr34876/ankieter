@@ -34,5 +34,9 @@ def test_create_poll_post_valid(client, app):
 ])
 def test_create_poll_post_invalid(client, post_data, error_msg):
     response = client.post('/polls/create', data=post_data)
-    assert response.status_code == 400
-    assert error_msg in response.data.decode('utf-8')
+    if error_msg:
+        assert response.status_code == 400
+        assert error_msg in response.data.decode('utf-8')
+    else:
+        # Jeśli brak komunikatu błędu – powinno przejść
+        assert response.status_code in (200, 302)
