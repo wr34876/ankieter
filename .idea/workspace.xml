@@ -151,6 +151,7 @@
       <workItem from="1749202283706" duration="310000" />
       <workItem from="1750543366891" duration="9944000" />
       <workItem from="1751402931523" duration="23098000" />
+      <workItem from="1751558089212" duration="263000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project skeleton – Flask Ankieter">
       <option name="closed" value="true" />
@@ -208,6 +209,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ankieter2$Ankieter.coverage" NAME="Ankieter Coverage Results" MODIFIED="1751554256065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ankieter$Ankieter.coverage" NAME="Ankieter Coverage Results" MODIFIED="1750544267033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ankieter2$.coverage" NAME=" Coverage Results" MODIFIED="1751557621666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/ankieter2$.coverage" NAME=" Coverage Results" MODIFIED="1751558178727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>
