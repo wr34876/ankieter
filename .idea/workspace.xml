@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd9b8a08-8aa5-4894-a093-bae5716daec5" name="Changes" comment="Bind Flask to 0.0.0.0 and dynamic port for Render">
-      <change afterPath="$PROJECT_DIR$/app/templates/feedback_thanks.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_create_poll.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/feedback.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/feedback_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/polls.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/polls.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_routes.py" afterDir="false" />
     </list>
@@ -22,8 +20,8 @@
       <list>
         <option value="Flask Main" />
         <option value="Python Unit Test" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -157,7 +155,7 @@
       <workItem from="1748961245188" duration="5208000" />
       <workItem from="1749202283706" duration="310000" />
       <workItem from="1750543366891" duration="9944000" />
-      <workItem from="1751402931523" duration="10171000" />
+      <workItem from="1751402931523" duration="11458000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project skeleton – Flask Ankieter">
       <option name="closed" value="true" />
@@ -215,6 +213,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ankieter2$Ankieter.coverage" NAME="Ankieter Coverage Results" MODIFIED="1751536646228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ankieter$Ankieter.coverage" NAME="Ankieter Coverage Results" MODIFIED="1750544267033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ankieter2$.coverage" NAME=" Coverage Results" MODIFIED="1751539916075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/ankieter2$.coverage" NAME=" Coverage Results" MODIFIED="1751541178015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

@@ -140,3 +140,4 @@ def test_delete_poll(client, app):
         from app.models.poll import Poll
         deleted_poll = Poll.query.get(poll_id)
         assert deleted_poll is None
+
