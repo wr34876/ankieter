@@ -94,3 +94,15 @@ def list_categories():
     """Lista wszystkich kategorii"""
     categories = Category.query.all()
     return render_template('list.html', categories=categories)
+
+
+@main.route('/polls/<int:poll_id>/delete', methods=['POST'])
+def delete_poll(poll_id):
+    """Usuwanie ankiety i jej opcji"""
+    poll = Poll.query.get_or_404(poll_id)
+    # Usuwamy powiązane opcje odpowiedzi
+    for option in poll.answer_options:
+        db.session.delete(option)
+    db.session.delete(poll)
+    db.session.commit()
+    return redirect(url_for('main.index'))
