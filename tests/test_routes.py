@@ -65,57 +65,78 @@ def test_list_options_not_found(client):
     response = client.get('/polls/999/options')  # zakładamy, że 999 nie istnieje
     assert response.status_code == 404
 
-
-'''
-#test dla nieistniejącego poll_id w /polls/<int:poll_id>/options
-
 def test_vote_option(client, app):
-    # Przykład oddania głosu na opcję o id=1
     with app.app_context():
         option = AnswerOption.query.first()
         initial_votes = option.votes
 
-    response = client.post(f'/polls/{option.poll_id}/vote', data={'option_id': option.id})
+    response = client.post(f'/polls/{option.poll_id}/vote', data={'answer': option.id})
     assert response.status_code == 302  # zakładamy przekierowanie po głosowaniu
 
     with app.app_context():
         updated_option = AnswerOption.query.get(option.id)
         assert updated_option.votes == initial_votes + 1
 
-
-#testy formularza głosowania, jeśli jest endpoint do przyjmowania głosu
-#zakładając, że istnieje endpoint /polls/<int:poll_id>/vote (POST)
-
-def test_vote_option(client, app):
-    # Przykład oddania głosu na opcję o id=1
-    with app.app_context():
-        option = AnswerOption.query.first()
-        initial_votes = option.votes
-
-    response = client.post(f'/polls/{option.poll_id}/vote', data={'option_id': option.id})
-    assert response.status_code == 302  # zakładamy przekierowanie po głosowaniu
-
-    with app.app_context():
-        updated_option = AnswerOption.query.get(option.id)
-        assert updated_option.votes == initial_votes + 1
 
 #test opinii użytkownika (feedback)
-#jeśli istnieje endpoint np. /feedback (POST i GET)
-
 def test_feedback_form_get(client):
     response = client.get('/feedback')
     assert response.status_code == 200
-    assert b'Formularz opinii' in response.data  # zakładamy taki tekst w szablonie
+    assert b'Formularz opinii' in response.data
+
 
 def test_feedback_form_post(client, app):
-    response = client.post('/feedback', data={'message': 'Super aplikacja!'}, follow_redirects=True)
+    response = client.post('/feedback', data={'message': 'Świetna aplikacja!'}, follow_redirects=True)
     assert response.status_code == 200
-    assert b'Dziękujemy za opinię' in response.data
+    assert 'Dziękujemy za opinię' in response.get_data( as_text=True )
 
     with app.app_context():
         from app.models.user_feedback import UserFeedback
-        feedback = UserFeedback.query.filter_by(message='Super aplikacja!').first()
+        feedback = UserFeedback.query.filter_by(message='Świetna aplikacja!').first()
         assert feedback is not None
 
 
-'''
+def test_feedback_form_post_empty_message(client):
+    response = client.post('/feedback', data={'message': ''})
+    assert response.status_code == 400
+    assert 'Wiadomość nie może być pusta' in response.get_data(as_text=True)
+
+def test_vote_valid_option(client, app):
+    with app.app_context():
+        from app.models.answer_option import AnswerOption
+        option = AnswerOption.query.first()
+        initial_votes = option.votes
+
+    response = client.post(f'/polls/{option.poll_id}/vote', data={'answer': option.id}, follow_redirects=True)
+    assert response.status_code == 200
+
+    with app.app_context():
+        from app.models.answer_option import AnswerOption
+        updated_option = AnswerOption.query.get(option.id)
+        assert updated_option.votes == initial_votes + 1
+
+
+def test_vote_missing_option(client):
+    response = client.post('/polls/1/vote', data={}, follow_redirects=True)
+    assert response.status_code == 400
+    assert b'Nie wybrano odpowiedzi' in response.data
+
+
+def test_vote_invalid_option(client):
+    # Zakładamy, że poll_id=1 istnieje, ale option_id=999 nie
+    response = client.post('/polls/1/vote', data={'answer': 999})
+    assert response.status_code == 404
+
+def test_delete_poll(client, app):
+    with app.app_context():
+        from app.models.poll import Poll
+        poll = Poll.query.first()
+        poll_id = poll.id
+
+    response = client.post(f'/polls/{poll_id}/delete', follow_redirects=True)
+    assert response.status_code == 200
+
+    with app.app_context():
+        from app.models.poll import Poll
+        deleted_poll = Poll.query.get(poll_id)
+        assert deleted_poll is None

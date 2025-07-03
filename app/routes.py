@@ -77,10 +77,27 @@ def vote(poll_id):
         return "Nie wybrano odpowiedzi", 400
 
     try:
-        selected_option = AnswerOption.query.get_or_404(selected_option_id)
-        if selected_option.poll_id != poll_id:
-            return "Nieprawidłowa opcja odpowiedzi", 400
+        selected_option_id = int(selected_option_id)
 
+    except ValueError:
+        return "Nieprawidłowa opcja odpowiedzi", 400
+
+    selected_option = AnswerOption.query.get(selected_option_id)
+    if selected_option is None:
+        # Opcja nie istnieje - zwracamy 404
+        return "Opcja odpowiedzi nie istnieje", 404
+
+    if selected_option.poll_id != poll.id:
+        return "Nieprawidłowa opcja odpowiedzi dla tej ankiety", 400
+
+        # selected_option = AnswerOption.query.get_or_404(selected_option_id)
+        #if selected_option is None:
+            # Opcja odpowiedzi nie istnieje - zwracamy 404
+         #   return "Opcja odpowiedzi nie istnieje", 404
+
+        #if selected_option.poll_id != poll_id:
+        #    return "Nieprawidłowa opcja odpowiedzi", 400
+    try:
         selected_option.votes += 1
         db.session.commit()
 
@@ -113,15 +130,11 @@ def feedback():
     if request.method == 'POST':
         message = request.form.get('message')
         if not message.strip():
-            return "Treść opinii nie może być pusta", 400
+            return "Wiadomość nie może być pusta.", 400
 
-        try:
-            feedback = UserFeedback(message=message.strip())
-            db.session.add(feedback)
-            db.session.commit()
-            return render_template('feedback.html', success=True)
-        except Exception as e:
-            db.session.rollback()
-            return f"Błąd podczas zapisywania opinii: {str(e)}", 500
+        feedback = UserFeedback(message=message.strip())
+        db.session.add(feedback)
+        db.session.commit()
+        return render_template('feedback_thanks.html')
 
-    return render_template('feedback.html', success=False)
+    return render_template('feedback_form.html')
