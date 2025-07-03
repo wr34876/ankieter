@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd9b8a08-8aa5-4894-a093-bae5716daec5" name="Changes" comment="Bind Flask to 0.0.0.0 and dynamic port for Render">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="fd9b8a08-8aa5-4894-a093-bae5716daec5" name="Changes" comment="Bind Flask to 0.0.0.0 and dynamic port for Render" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +152,7 @@
       <workItem from="1750543366891" duration="9944000" />
       <workItem from="1751402931523" duration="23098000" />
       <workItem from="1751558089212" duration="263000" />
-      <workItem from="1751560440756" duration="1061000" />
+      <workItem from="1751560440756" duration="1672000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project skeleton – Flask Ankieter">
       <option name="closed" value="true" />
