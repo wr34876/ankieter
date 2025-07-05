@@ -34,3 +34,19 @@
     </div>
 </body>
 </html>
+{{ poll.question }}
+{% for option in options %}
+ {{ option.text }}
+{% endfor %}
+Powrót do listy Zagłosuj
+{% set total_votes = options|map(attribute='votes')|sum %} {% set max_votes = options|map(attribute='votes')|max %}
+{% if total_votes == 0 %}
+Brak oddanych głosów. Bądź pierwszą osobą, która zagłosuje!
+
+{% else %} {% for option in options %} {% set percent = (option.votes / total_votes * 100) | round(1) %}
+{{ option.text }} {{ option.votes }} głosów ({{ percent }}%)
+{% endfor %}
+Łącznie oddano głosów: {{ total_votes }}
+{% endif %}
+Usuń ankietę
+Data utworzenia: {{ poll.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
