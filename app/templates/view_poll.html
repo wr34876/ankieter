@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,25 +29,38 @@
             </form>
         </div>
 
+        {% set total_votes = options|map(attribute='votes')|sum %}
+        {% set max_votes = options|map(attribute='votes')|max %}
+        
+        <div class="poll-results">
+            {% if total_votes == 0 %}
+            <p class="no-votes">Brak oddanych głosów. Bądź pierwszą osobą, która zagłosuje!</p>
+            {% else %}
+            <h2>Wyniki głosowania</h2>
+            <div class="results-list">
+                {% for option in options %}
+                {% set percent = (option.votes / total_votes * 100) | round(1) %}
+                <div class="result-item {% if option.votes == max_votes and total_votes > 0 %}leading-option{% endif %}">
+                    <div class="result-label">
+                        <span class="option-text">{{ option.text }}</span>
+                        <span class="votes">{{ option.votes }} głosów ({{ percent }}%)</span>
+                    </div>
+                    <div class="bar-outer">
+                        <div class="bar-inner" style="width: {{ percent }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <p class="total-votes">Łącznie oddano głosów: {{ total_votes }}</p>
+            {% endif %}
+        </div>
+
         <div class="poll-info">
             <p class="date">Data utworzenia: {{ poll.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <form method="POST" action="{{ url_for('main.delete_poll', poll_id=poll.id) }}" class="delete-form">
+                <button type="submit" class="button-danger" onclick="return confirm('Czy na pewno chcesz usunąć tę ankietę?')">Usuń ankietę</button>
+            </form>
         </div>
     </div>
 </body>
 </html>
-{{ poll.question }}
-{% for option in options %}
- {{ option.text }}
-{% endfor %}
-Powrót do listy Zagłosuj
-{% set total_votes = options|map(attribute='votes')|sum %} {% set max_votes = options|map(attribute='votes')|max %}
-{% if total_votes == 0 %}
-Brak oddanych głosów. Bądź pierwszą osobą, która zagłosuje!
-
-{% else %} {% for option in options %} {% set percent = (option.votes / total_votes * 100) | round(1) %}
-{{ option.text }} {{ option.votes }} głosów ({{ percent }}%)
-{% endfor %}
-Łącznie oddano głosów: {{ total_votes }}
-{% endif %}
-Usuń ankietę
-Data utworzenia: {{ poll.created_at.strftime('%Y-%m-%d %H:%M:%S') }}

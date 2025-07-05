@@ -1,14 +1,42 @@
-Ankieter
-Prosta aplikacja do tworzenia i głosowania w ankietach. Dodawaj pytania, głosuj i sprawdzaj wyniki na żywo. Projekt szkolny – baw się dobrze!
 
-Utwórz ankietę
-Dostępne ankiety
-{% if polls %}
-{% for poll in polls %}
-{{ poll.question }}
-Utworzono: {{ poll.created_at.strftime('%Y-%m-%d') }} Zobacz ankietę Usuń
-{% endfor %}
-{% else %}
-Brak dostępnych ankiet
-
-{% endif %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankieter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ankieter</h1>
+        <p class="about">
+            Prosta aplikacja do tworzenia i głosowania w ankietach. Dodawaj pytania,
+            głosuj i sprawdzaj wyniki na żywo. Projekt szkolny – baw się dobrze!
+        </p>
+        <div class="actions">
+            <a href="{{ url_for('main.create_poll') }}" class="button">Utwórz ankietę</a>
+        </div>
+        
+        <div class="polls-list">
+            <h2>Dostępne ankiety</h2>
+            {% if polls %}
+                <ul>
+                {% for poll in polls %}
+                    <li class="poll-item">
+                        <h3>{{ poll.question }}</h3>
+                        <span class="date">Utworzono: {{ poll.created_at.strftime('%Y-%m-%d') }}</span>
+                        <a href="{{ url_for('main.view_poll', poll_id=poll.id) }}" class="button-small">Zobacz ankietę</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-polls">Brak dostępnych ankiet</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    <p>Masz sugestię? <a href="{{ url_for('main.feedback') }}">Zostaw opinię</a>.</p>
+</footer>
+</html>
